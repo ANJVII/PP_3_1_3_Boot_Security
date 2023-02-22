@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Spring Security Example</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <style>
+        table {
+            font-family: Arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+<h2>All Employees (Все работники)</h2>
+<br>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Department</th>
+        <th>Salary</th>
+        <th>Password</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Roles</th>
+        <th colspan="2">Operations</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:utext="${user.getName()}"></td>
+        <td th:utext="${user.getLastName()}"></td>
+        <td th:utext="${user.getDepartment()}"></td>
+        <td th:utext="${user.getSalary()}"></td>
+        <td th:utext="${user.getPassword()}"></td>
+        <td th:utext="${user.getPhoneNumber()}"></td>
+        <td th:utext="${user.getEmail()}"></td>
+        <td th:utext="${user.getRole()}"></td>
+        <td style="text-align: center">
+            <form style="align-items: center" th:method="GET" th:action="@{/updateInfo-{id}(id=${user.getId()})}">
+                <input type="submit" value="Update"/>
+            </form>
+        </td>
+        <td style="text-align: center">
+            <form style="align-items: center" th:method="DELETE" th:action="@{/deleteUser?id={id}(id=${user.getId()})}">
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+    </th:each>
+</table>
+<br>
+<form method="get" th:action="@{/addNewUser}">
+    <input type="submit" value="Add">
+</form>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Please sign in</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+</head>
+<center>
+<body>
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
+<div th:class="container">
+    <form th:class="form-signin" method="post" th:action="@{/login}">
+        <h2 th:class="form-signin-heading">Please sign in</h2>
+        <p>
+            <label th:for="username" th:class="sr-only">Username</label>
+            <input type="text" th:id="user" name="username" th:class="form-control" placeholder="email" required autofocus>
+        </p>
+        <p>
+            <label th:for="password" th:class="sr-only">Password</label>
+            <input type="password" th:id="pass" name="password" th:class="form-control" placeholder="password" required>
+        </p>
+        <input th:name="_csrf" type="hidden" th:value="6f752256-832f-434e-8fbf-6748208f0efe" />
+        <button th:class="btn btn-lg btn-primary btn-block" th:type="submit">Sign in</button>
+    </form>
+</div>
+</body></center></html>
