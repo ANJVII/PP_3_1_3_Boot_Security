@@ -1,12 +1,41 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Spring Security Example</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <style>
+        h1 {
+            background-color: #5e5e5e;
+            color: #DCDCDC;
+            padding: 15px;
+        }
+        body {
+            background-color: #a1a0a0;
+        }
+        table {
+            font-family: Arial, sans-serif;
+            background-color:#DCDCDC;
+            border-radius: 20px;
+            padding: 10px;
+        }
+        p {
+            background-color:#5e5e5e;
+            font-size: 20px;
+            color: #DCDCDC;
+        }
+        input {
+            border: none;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: #5e5e5e;
+            color: #DCDCDC;
+        }
+    </style>
 </head>
 <body>
 <h1>Welcome spring boot security page, <span th:text="${profile.getName()}">User</span>!</h1>
 <hr>
-<p style="font-size:100%;">Your info:</p>
+<p>Your info:</p>
 <table>
     <tr>
         <td>Name:</td>
@@ -36,6 +65,10 @@
 <br>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
+</form>
+<br>
+<form th:action="@{/admin/users}" method="get">
+    <input type="submit" value="All users"/>
 </form>
 
 </body>

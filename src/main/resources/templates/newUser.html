@@ -1,22 +1,55 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title></title>
+    <title>Spring Security Example</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <style>
+        h2 {
+            background-color: #5e5e5e;
+            color: #DCDCDC;
+            padding: 15px;
+        }
+        body {
+            background-color: #a1a0a0;
+        }
+        table {
+            font-family: Arial, sans-serif;
+            background-color:#DCDCDC;
+            border-radius: 20px;
+            padding: 10px;
+        }
+        p {
+            background-color:#5e5e5e;
+            font-size: 20px;
+            color: #DCDCDC;
+        }
+        input {
+            border: none;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: #5e5e5e;
+            color: #DCDCDC;
+        }
+        h5 {
+            color: #b60202;
+        }
+    </style>
 </head>
 
 <body>
-<h3>Employee Info (Информация о работнике)</h3>
+<h2>Employee Info (Информация о работнике)</h2>
 <br>
-<form th:action="@{/saveUser}" th:object="${user}" accept-charset="UTF-8" th:method="post">
+<form th:action="@{admin/saveUser}" th:object="${user}" accept-charset="UTF-8" th:method="post">
+    <hidden th:field="*{id}"/>
     <label>Name:</label>
     <input th:field="*{name}" type="text" id="name" style=position:absolute;left:10%;/>
-    <p th:if="${#fields.hasErrors('name')}">Invalid Name</p>
+    <h5 th:if="${#fields.hasErrors('name')}">Invalid Name</h5>
     <br><br>
     <label>Surname:</label>
     <input th:field="*{lastName}" type="text" id="surname" style=position:absolute;left:10%;/>
-    <p th:if="${#fields.hasErrors('lastName')}">Invalid Surname</p>
+    <h5 th:if="${#fields.hasErrors('lastName')}">Invalid Surname</h5>
     <br><br>
     <label>Department:</label>
     <input th:field="*{department}" type="text" id="department" style=position:absolute;left:10%;/>
@@ -26,27 +59,27 @@
     <br><br>
     <label>Phone Number:</label>
     <input th:field="*{phoneNumber}" type="text" id="phoneNumber" style=position:absolute;left:10%;/>
-    <p th:if="${#fields.hasErrors('phoneNumber')}">Invalid Number</p>
+    <h5 th:if="${#fields.hasErrors('phoneNumber')}">Invalid Number</h5>
     <br><br><br><hr>
     <h3>Registration data</h3>
     <br>
     <label>Username:</label>
     <input th:field="*{username}" type="text" id="username" style=position:absolute;left:10%;/>
-    <p th:if="${#fields.hasErrors('username')}">Invalid Username</p>
+    <h5 th:if="${#fields.hasErrors('username')}">Invalid Username</h5>
     <br><br>
     <label>Email:</label>
     <input th:field="*{email}" type="text" id="email" style=position:absolute;left:10%;/>
-    <p th:if="${#fields.hasErrors('email')}">Invalid Email</p>
+    <h5 th:if="${#fields.hasErrors('email')}">Invalid Email</h5>
     <br><br>
     <label>Password:</label>
     <input th:field="*{password}" type="password" id="password" style=position:absolute;left:10%;/>
-    <p th:if="${#fields.hasErrors('password')}">Invalid Password</p>
-<!--    <br><br>-->
-<!--    <input th:field="*{roles}" type="hidden" id="roles" value="ROLE_USER">-->
+    <h5 th:if="${#fields.hasErrors('password')}">Invalid Password</h5>
     <br><br>
-    <select name="role">
-        <option th:field="*{roles}" value="ROLE_USER">User</option>
-    </select>
+    <label>Role:</label>
+    <p th:each="role : ${access}">
+    <input type="checkbox" th:field="*{roles}" th:value="${role.id}"
+           th:text="${role.name}">
+    </p>
     <br><br>
     <input type="submit" value="OK">
 </form>

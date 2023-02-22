@@ -12,9 +12,9 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = CheckEmailValidator.class)
 public @interface CheckEmail {
 
-    public String value() default "@gmail.com";
-    public String message() default "email must ends with @gmail.com";
+    String value() default "@gmail.com";
+    String message() default "email must ends with @gmail.com";
 
-    public Class<?>[] groups() default {};
-    public Class<? extends Payload> [] payload() default {};
+    Class<?>[] groups() default {};
+    Class<? extends Payload> [] payload() default {};
 }

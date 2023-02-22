@@ -7,27 +7,31 @@
     <title>Spring Security Example</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <style>
+        h2 {
+            background-color: #5e5e5e;
+            color: #DCDCDC;
+            padding: 15px;
+        }
+        body {
+            background-color: #a1a0a0;
+        }
         table {
             font-family: Arial, sans-serif;
             border-collapse: collapse;
             width: 100%;
-        td, th {
-            border: 1px solid #dddddd;
+            background-color:#DCDCDC;
+        th {
+            border: 1px solid #d3d3d3;
             text-align: left;
             padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #dddddd;
         }
     </style>
 </head>
 
 <body>
 <h2>All Employees (Все работники)</h2>
-<br>
-<table border="1">
-    <tr>
+<table border="1" cellpadding="10px">
+    <tr style="color:#5e5e5e;">
         <th>Name</th>
         <th>Surname</th>
         <th>Department</th>
@@ -48,12 +52,12 @@
         <td th:utext="${user.getEmail()}"></td>
         <td th:utext="${user.getRole()}"></td>
         <td style="text-align: center">
-            <form style="align-items: center" th:method="GET" th:action="@{/updateInfo-{id}(id=${user.getId()})}">
+            <form style="align-items: center" th:method="GET" th:action="@{/admin/updateInfo-{id}(id=${user.getId()})}">
                 <input type="submit" value="Update"/>
             </form>
         </td>
         <td style="text-align: center">
-            <form style="align-items: center" th:method="DELETE" th:action="@{/deleteUser?id={id}(id=${user.getId()})}">
+            <form style="align-items: center" th:method="DELETE" th:action="@{/admin/deleteUser?id={id}(id=${user.getId()})}">
                 <input type="submit" value="Delete"/>
             </form>
         </td>
@@ -61,8 +65,12 @@
     </th:each>
 </table>
 <br>
-<form method="get" th:action="@{/addNewUser}">
+<form method="get" th:action="@{/admin/addNewUser}">
     <input type="submit" value="Add">
+</form>
+<br>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
 </form>
 </body>
 </html>
